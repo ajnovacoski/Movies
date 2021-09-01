@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Filmes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="irParaCadastrarPage()">
+      <ion-icon name="add" color="light"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list *ngFor="let filme of _lista_filmes">
+    <ion-item (click)="detalhar(filme)">
+        <ion-icon name="videocam-sharp" slot="start" size="small"></ion-icon>
+      {{filme.getTitulo()}}
+    </ion-item>
+  </ion-list>
+</ion-content>

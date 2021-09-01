@@ -1,0 +1,16 @@
+Ação
+Aventura
+Comédia
+Dança
+Documentário
+Faraoeste
+Drama
+Fantasia
+Ficção Científica
+Guerra
+Mistério
+Musical
+Policial
+Romance
+Terror
+Thriller

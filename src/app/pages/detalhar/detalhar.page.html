@@ -1,0 +1,108 @@
+<ion-header>
+  <!-- <ion-toolbar>
+    <ion-button fill="clear">
+      <ion-icon name= "chevron-back-outline" slot="start"></ion-icon>  
+    </ion-button>
+    <ion-title text-center>
+      Detalhar
+    </ion-title >
+  <ion-button fill="clear">
+      <ion-icon name= "chevron-back-outline" slot="start"></ion-icon>  
+    </ion-button>
+    <ion-title slot="end">
+      Detalhar
+    </ion-title>
+  </ion-toolbar> -->
+  <ion-toolbar text-center>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-center>{{_filme.getTitulo()}}</ion-title>
+  </ion-toolbar>
+  
+
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Habilitar Edição</ion-label>
+    <ion-toggle color="success" [(ngModel)]="_editar"></ion-toggle>
+  </ion-item>
+  <ion-list>
+    <form [formGroup] = '_formDetalhar' (ngSubmit)='submitForm()' novalidate>
+      <ion-item>
+        <ion-label position="floating">Título</ion-label>
+        <ion-input [disabled]="_editar" type="text" formControlName="titulo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Sinopse</ion-label>
+        <!-- <ion-input type="text" formControlName="sinopse" ></ion-input> -->
+        <ion-textarea [disabled]="_editar" formControlName="sinopse"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Duração(Minutos)</ion-label>
+        <ion-input [disabled]="_editar" type="number" formControlName="duracaoMinutos"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Ano de Lançamento</ion-label>
+       <ion-datetime [disabled]="_editar" [pickerOptions]="customPickerOptions" formControlName="anoLancamento" displayFormat="YYYY" min="1950" max="2021">         
+       </ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Diretor</ion-label>
+        <ion-input [disabled]="_editar" type="text" formControlName="diretor"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Classificação Indicativa</ion-label>
+        <ion-select [disabled]="_editar" formControlName="classificacaoIndicativa">
+          <ion-select-option value="l">Livre</ion-select-option>
+          <ion-select-option value="l10">Acima de 10 anos</ion-select-option>
+          <ion-select-option value="l12">Acima de 12 anos</ion-select-option>
+          <ion-select-option value="l14">Acima de 14 anos</ion-select-option>
+          <ion-select-option value="l16">Acima de 16 anos</ion-select-option>
+          <ion-select-option value="l18">Acima de 18 anos</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Gênero</ion-label>
+        <ion-select [disabled]="_editar" formControlName="genero">
+          <ion-select-option value="acao">Ação</ion-select-option>
+          <ion-select-option value="aventura">Aventura</ion-select-option>
+          <ion-select-option value="comedia">Comédia</ion-select-option>
+          <ion-select-option value="danca">Dança</ion-select-option>
+          <ion-select-option value="documentario">Documentário</ion-select-option>
+          <ion-select-option value="faraoeste">Faraoeste</ion-select-option>
+          <ion-select-option value="drama">Drama</ion-select-option>
+          <ion-select-option value="fantasia">Fantasia</ion-select-option>
+          <ion-select-option value="ficcao">Ficção Científica</ion-select-option>
+          <ion-select-option value="guerra">Guerra</ion-select-option>
+          <ion-select-option value="misterio">Mistério </ion-select-option>
+          <ion-select-option value="musical">Musical</ion-select-option>
+          <ion-select-option value="policial">Policial</ion-select-option>
+          <ion-select-option value="romance">Romance</ion-select-option>
+          <ion-select-option value="terror">Terror</ion-select-option>
+          <ion-select-option value="thriller">Thriller</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Orçamento</ion-label>
+        <ion-input [disabled]="_editar" type="number" formControlName="orcamento"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-button [disabled]="_editar" size="default" color="secondary" 
+        type="submit">
+          Editar
+        <ion-icon slot="end" name="create"></ion-icon>
+      </ion-button>
+      <ion-button [disabled]="_editar" size="default" color="danger" 
+        (click)="excluir()">
+          Excluir
+        <ion-icon slot="end" name="trash"></ion-icon>
+      </ion-button>
+      </ion-item>
+    </form>
+</ion-list>
+
+</ion-content>
