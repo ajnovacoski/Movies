@@ -36,35 +36,41 @@
         <ion-label position="floating">Título</ion-label>
         <ion-input [disabled]="_editar" type="text" formControlName="titulo"></ion-input>
       </ion-item>
+      
       <ion-item>
         <ion-label position="floating">Sinopse</ion-label>
         <!-- <ion-input type="text" formControlName="sinopse" ></ion-input> -->
         <ion-textarea [disabled]="_editar" formControlName="sinopse"></ion-textarea>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Duração(Minutos)</ion-label>
         <ion-input [disabled]="_editar" type="number" formControlName="duracaoMinutos"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Ano de Lançamento</ion-label>
        <ion-datetime [disabled]="_editar" [pickerOptions]="customPickerOptions" formControlName="anoLancamento" displayFormat="YYYY" min="1950" max="2021">         
        </ion-datetime>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Diretor</ion-label>
         <ion-input [disabled]="_editar" type="text" formControlName="diretor"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Classificação Indicativa</ion-label>
         <ion-select [disabled]="_editar" formControlName="classificacaoIndicativa">
-          <ion-select-option value="l">Livre</ion-select-option>
-          <ion-select-option value="l10">Acima de 10 anos</ion-select-option>
-          <ion-select-option value="l12">Acima de 12 anos</ion-select-option>
-          <ion-select-option value="l14">Acima de 14 anos</ion-select-option>
-          <ion-select-option value="l16">Acima de 16 anos</ion-select-option>
-          <ion-select-option value="l18">Acima de 18 anos</ion-select-option>
+          <ion-select-option value="l">Livre </ion-select-option>
+          <ion-select-option value="dez">Acima de 10 anos</ion-select-option>
+          <ion-select-option value="doze">Acima de 12 anos</ion-select-option>
+          <ion-select-option value="quatorze">Acima de 14 anos</ion-select-option>
+          <ion-select-option value="dezesseis">Acima de 16 anos</ion-select-option>
+          <ion-select-option value="dezoito">Acima de 18 anos</ion-select-option>
         </ion-select>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Gênero</ion-label>
         <ion-select [disabled]="_editar" formControlName="genero">
@@ -86,6 +92,7 @@
           <ion-select-option value="thriller">Thriller</ion-select-option>
         </ion-select>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Orçamento</ion-label>
         <ion-input [disabled]="_editar" type="number" formControlName="orcamento"></ion-input>

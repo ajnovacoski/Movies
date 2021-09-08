@@ -32,68 +32,27 @@ export class DetalharPage implements OnInit {
         duracaoMinutos: [this._filme.getDuracao(), [Validators.required]],
         anoLancamento: [this._filme.getAnoLancamento(), [Validators.required]],
         diretor: [this._filme.getDiretor(), [Validators.required]],
-        classificacaoIndicativa: [this._filme.getClassificacaoIndicativa, [Validators.required]],
+        classificacaoIndicativa: [this._filme.getClassificacaoIndicativa(), [Validators.required]],
         genero: [this._filme.getGenero(), [Validators.required]],
         orcamento: [this._filme.getOrcamento(), [Validators.required]]
     });
   }
 
-  public goHome(): void{
-    this._router.navigate(["../home"]);
-  }
-
-  public editar(): void{
-    let _filmeEditado : Filme = new Filme(this._formDetalhar.value['titulo'], this._formDetalhar.value['sinopse'], this._formDetalhar.value['duracaoMinutos'],
-    this._formDetalhar.value['anoLancamento'], this._formDetalhar.value['diretor'], this._formDetalhar.value['classificacaoIndicativa'],
-    this._formDetalhar.value['genero'], this._formDetalhar.value['orcamento']);
-    _filmeEditado.setId(this._filme.getId());
-    if(this._filmeService.editar(this._filme, _filmeEditado)) {
-      this.presentAlert('Filmes', 'Editar', 'Dados do filme editados com sucesso!');
-      this._router.navigate(['home']);      
-    } 
-    
-  }
-
-  public excluir(): void{
-    if(this._filmeService.excluir(this._filme)){
-      this.presentAlert('Filmes', 'Excluir', 'Filme removido com sucesso!')
-      this._router.navigate(['home'])
-    } else {
-      this.presentAlert('Filmes', 'Excluir', 'Filme nao encontrado!')
-    }
+  
+  private get errorControl(){
+    return this._formDetalhar.controls;
   }
 
   private submitForm(): boolean{
     this._isSubmited = true;
     if(!this._formDetalhar.valid){
-      this.presentAlert('Filmes', 'Cadastrar', 'Preencha todos os campos!');
+      this.presentAlert('Filmes', 'Edição', 'Preencha todos os campos!');
       return false;
     } else {
-      this.cadastrar();
+      this.editar();
       return true;
     }
   }
-
-  private get errorControl(){
-    return this._formDetalhar.controls;
-  }
-
-  private cadastrar(): void{
-    let filme:Filme = new Filme(
-      this._formDetalhar.value['titulo'],
-      this._formDetalhar.value['sinopse'],
-      this._formDetalhar.value['duracaoMinutos'],
-      this._formDetalhar.value['anoLancamento'],
-      this._formDetalhar.value['diretor'],
-      this._formDetalhar.value['classificacaoIndicativa'],
-      this._formDetalhar.value['genero'],
-      this._formDetalhar.value['orcamento']
-    )
-    this._filmeService.inserir(filme);
-    this.presentAlert('Filmes','Cadastrar', filme.getTitulo() + ' cadastrado com Sucesso!');
-    this._router.navigate(['home'])
-    }
-
     
     async presentAlert(titulo:string, subtitulo:string, mensagem:string) {
       const alert = await this.alertController.create({
@@ -105,6 +64,32 @@ export class DetalharPage implements OnInit {
       });
   
       await alert.present();
+    }
+
+    public goHome(): void{
+      this._router.navigate(["../home"]);
+    }
+  
+    public editar(): void{
+      let _filmeEditado : Filme = new Filme(this._formDetalhar.value['titulo'], this._formDetalhar.value['sinopse'], this._formDetalhar.value['duracaoMinutos'],
+      this._formDetalhar.value['anoLancamento'], this._formDetalhar.value['diretor'], this._formDetalhar.value['classificacaoIndicativa'],
+      this._formDetalhar.value['genero'], this._formDetalhar.value['orcamento']);
+      if(this._filmeService.editar(this._filme, _filmeEditado)) {
+        this.presentAlert('Filmes', 'Editar', 'Dados do filme editados com sucesso!');
+        this._router.navigate(['home']);      
+      } else {
+        console.log('BARA BARA BARA')
+      }
+      
+    }
+  
+    public excluir(): void{
+      if(this._filmeService.excluir(this._filme)){
+        this.presentAlert('Filmes', 'Excluir', 'Filme removido com sucesso!')
+        this._router.navigate(['home'])
+      } else {
+        this.presentAlert('Filmes', 'Excluir', 'Filme nao encontrado!')
+      }
     }
 
 }
