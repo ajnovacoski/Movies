@@ -3,11 +3,11 @@
 
 ### Usando ionic, typescript, fazer um app que tenha um CRUD do elemento "Filme".
  Nesse caso, temos o Filme, com atributos: 
-  - título
-  -  ano de lançamento
-  -  sinopse
-  -  diretor
-  -  duração(em minutos)
-  -  classificação indicativa
-  -  gênero
-  -  orçamento.
+  -  Título
+  -  Ano de lançamento
+  -  Sinopse
+  -  Diretor
+  -  Duração(em minutos)
+  -  Classificação Indicativa
+  -  Gênero
+  -  Orçamento.
