@@ -8,11 +8,10 @@ export class Filme {
     private _genero:string;
     private _orcamento:number;
     private _id:number;
+    private _imgURL: string;
 
 
-    constructor(titulo:string, sinopse:string, duracao_minutos:number, ano_lancamento:number, diretor:string, classificacao_indicativa:string, genero:string, orcamento:number){
-        let chave = new Date();
-        this._id =  chave.getTime();     
+    constructor(titulo:string, sinopse:string, duracao_minutos:number, ano_lancamento:number, diretor:string, classificacao_indicativa:string, genero:string, orcamento:number){  
         this._titulo = titulo;
         this._sinopse = sinopse;
         this._duracao_minutos = duracao_minutos;
@@ -21,6 +20,14 @@ export class Filme {
         this._classificacao_indicativa = classificacao_indicativa;
         this._genero = genero;
         this._orcamento = orcamento;        
+    }
+
+    public getImgURL(): string{
+        return this._imgURL;
+    }
+
+    public setImgURL(imgURL:string): void{
+        this._imgURL = imgURL;        
     }
 
     public getId(): number{

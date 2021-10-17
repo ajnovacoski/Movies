@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>signin</ion-title>
+    <ion-title>Filmes login Page</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <form [formGroup]="_formLogar" (ngSubmit)='submitForm()' novalidate>
+      <ion-item>
+        <ion-label position="floating">
+          Email
+        </ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        Senha
+      </ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+      <ion-button expand="full" color="success" type="submit">
+        Entrar
+        <ion-icon name="log-in-outline"></ion-icon>
+      </ion-button>
+      <ion-button expand="full" color="danger" (click)="_signInGoogle()">
+        Entrar com Google
+        <ion-icon slot="end" name="logo-google"></ion-icon>
+      </ion-button>
+    </form>
+    <a (click)="_irParaSignUp()">Nao tem cadastro? Clique Aqui!</a>
+  </ion-list>
 </ion-content>

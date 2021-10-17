@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Filme } from 'src/app/class/filme';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { CrudFilmeService } from 'src/app/services/crud-filme.service';
 import { FilmeService } from 'src/app/services/filme.service';
 
 @Component({
@@ -10,12 +12,25 @@ import { FilmeService } from 'src/app/services/filme.service';
 })
 export class HomePage {
   private _lista_filmes: any[];
+  private data: any;
 
   constructor(
     private _router:Router,
-    private _filmeService:FilmeService
+    private _filmeService:FilmeService,
+    private _filmeServiceDB:CrudFilmeService,
+    private _authService:AuthServiceService
   ) {
-    this._lista_filmes = _filmeService.getFilmes();    
+    this.data = this._filmeServiceDB.getFilmes();
+    this.data.forEach(element => {
+      const lista = element as Array<any>;
+      this._lista_filmes = []
+      lista.forEach(c => {
+        let filme = new Filme(c.data._titulo, c.data._sinopse, c.data._duracao_minutos, c.data._ano_lancamento, 
+          c.data._diretor, c.data._classificacao_indicativa, c.data._genero, c.data._orcamento)
+        filme.setId(c.key)
+        this._lista_filmes.push(filme)
+      });
+    });
   }
 
 
@@ -27,6 +42,12 @@ export class HomePage {
     this._router.navigateByUrl("/detalhar", 
     {state: {objeto: filme}
   })
+  }
+
+  private logout(): void{
+    if(this._authService.estaLogado()){
+      this._authService.signOut();
+    }
   }
 
 }

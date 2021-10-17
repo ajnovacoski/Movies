@@ -12,8 +12,6 @@ import { FilmeService } from 'src/app/services/filme.service';
 })
 export class CadastrarPage implements OnInit {
   private _formCadastrar: FormGroup;
-  private _isSubmited: boolean = false;
-
   constructor(public alertController: AlertController, 
     private _router: Router,
     private _filmeService:FilmeService,
@@ -37,7 +35,6 @@ export class CadastrarPage implements OnInit {
   }
 
   private submitForm(): boolean{
-    this._isSubmited = true;
     if(!this._formCadastrar.valid){
       this.presentAlert('Filmes', 'Cadastrar', 'Preencha todos os campos!');
       return false;

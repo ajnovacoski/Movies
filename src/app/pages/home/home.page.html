@@ -12,6 +12,11 @@
       <ion-icon name="add" color="light"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="logout()">
+      <ion-icon name="log-out-outline" color="light">Logout</ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <ion-list *ngFor="let filme of _lista_filmes">
     <ion-item (click)="detalhar(filme)">
