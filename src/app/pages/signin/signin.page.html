@@ -23,11 +23,19 @@
         Entrar
         <ion-icon name="log-in-outline"></ion-icon>
       </ion-button>
+      <ion-item></ion-item>
       <ion-button expand="full" color="danger" (click)="_signInGoogle()">
         Entrar com Google
         <ion-icon slot="end" name="logo-google"></ion-icon>
       </ion-button>
+      <ion-button expand="full" color="primary" (click)="_signInFacebook()">
+        Entrar com Facebook
+        <ion-icon slot="end" name="logo-facebook"></ion-icon>
+      </ion-button>
     </form>
-    <a (click)="_irParaSignUp()">Nao tem cadastro? Clique Aqui!</a>
+    <center>
+    <a (click)="_irParaSignUp()" color="green">Nao tem cadastro? Clique Aqui!</a>
+  </center>
   </ion-list>
+
 </ion-content>

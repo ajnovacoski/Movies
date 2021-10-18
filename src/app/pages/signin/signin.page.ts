@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { auth } from 'firebase';
 import { User } from 'src/app/class/user';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
@@ -17,23 +18,18 @@ export class SigninPage implements OnInit {
   constructor(public alertController: AlertController,
     public router: Router,
     public formBuilder: FormBuilder,
-    public authService: AuthServiceService) {
-      this.user = this.authService.getUserLogado()
-      if(this.user != null){
-        console.log("TESTE DO CARALHO")
-        console.log(this.user)
-      }
-     }
+    public authService: AuthServiceService) {      
+    }
 
   ngOnInit() {
+    this.user = this.authService.getUserLogado()
+      if(this.user != null){
+        this.router.navigate(['home'])
+      }
     this._formLogar = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
-    this.user = this.authService.getUserLogado()
-    if(this.user != null){
-      this.router.navigate(['home']);
-    }
 
   }
   
@@ -56,6 +52,10 @@ export class SigninPage implements OnInit {
 
   private _signInGoogle(): void{
     this.authService.signInWithGoogle();
+  }
+
+  private _signInFacebook(): void{
+    this.authService.signInWithFacebook();
   }
 
   private signIn(){
@@ -84,5 +84,9 @@ export class SigninPage implements OnInit {
 
   public _irParaSignUp(){
     this.router.navigate(["/signup"])
+  }
+  //metodo teste
+  private goHome(){
+    this.router.navigate(['home'])
   }
 }

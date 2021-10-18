@@ -15,10 +15,11 @@ export class CrudFilmeService {
   constructor(
     private auth: AuthServiceService,
     private db: AngularFireDatabase
-  ) {
-    this._user = this.auth.getUserLogado()
-    if(this._user != null){
-      this._PATH = this._PATH + "" + this._user.uid;
+  ) {    
+    this._PATH = 'filmes/'
+    if(this.auth.estaLogado()){
+      this._user = this.auth.getUserLogado();
+      this._PATH = this._PATH +""+this._user.uid
     }
    }
 
@@ -27,7 +28,8 @@ export class CrudFilmeService {
    }
 
    getFilmes(){
-     return this.db.list(this._PATH).snapshotChanges().pipe(
+     return this.db.list(this._PATH).
+     snapshotChanges().pipe(
        map((action) => {
          return action.map((dados) =>({
            key: dados.payload.key,

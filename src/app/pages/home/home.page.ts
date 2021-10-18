@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Filme } from 'src/app/class/filme';
+import { User } from 'src/app/class/user';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { CrudFilmeService } from 'src/app/services/crud-filme.service';
-import { FilmeService } from 'src/app/services/filme.service';
 
 @Component({
   selector: 'app-home',
@@ -13,13 +13,14 @@ import { FilmeService } from 'src/app/services/filme.service';
 export class HomePage {
   private _lista_filmes: any[];
   private data: any;
+  private _user: User;
 
   constructor(
     private _router:Router,
-    private _filmeService:FilmeService,
     private _filmeServiceDB:CrudFilmeService,
     private _authService:AuthServiceService
-  ) {
+  ) {    
+    this._user = this._authService.getUserLogado();
     this.data = this._filmeServiceDB.getFilmes();
     this.data.forEach(element => {
       const lista = element as Array<any>;
@@ -31,6 +32,9 @@ export class HomePage {
         this._lista_filmes.push(filme)
       });
     });
+  }
+
+  ngOnInit() {
   }
 
 
@@ -45,9 +49,8 @@ export class HomePage {
   }
 
   private logout(): void{
-    if(this._authService.estaLogado()){
-      this._authService.signOut();
-    }
+    this._authService.signOut()
   }
 
+  
 }

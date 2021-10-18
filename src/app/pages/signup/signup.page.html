@@ -1,9 +1,57 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Sign Up</ion-title>
+    <ion-title>
+      <ion-toolbar text-center>
+        <ion-buttons slot="start">
+          <ion-button (click)="goHome()">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title text-center>Cadastro Usuário</ion-title>
+      </ion-toolbar>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <form [formGroup] = '_formCadastrar' (ngSubmit)='submitForm()' novalidate>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <span *ngIf="_isSubmited && errorControl.email.errors?.required">
+      Preencher email é Obrigatório
+    </span>
+    <span *ngIf="_isSubmited && errorControl.email.errors?.email">
+      Formato de e-mail invalido
+    </span>
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" formControlName="senha">        
+      </ion-input>
+    </ion-item>
+    <span *ngIf="_isSubmited && errorControl.senha.errors?.required">
+      Preencher o telefone é Obrigatório
+    </span>
+    <span *ngIf="_isSubmited && errorControl.senha.errors?.minlength">
+      A senha precisa de no minimo 6 caracters
+    </span> 
+    <ion-item>
+      <ion-label position="floating">Confirmar Senha</ion-label>
+      <ion-input type="password" formControlName="confSenha">        
+      </ion-input>
+    </ion-item>
+    <span *ngIf="_isSubmited && errorControl.senha.errors?.required">
+      Preencher o senha é Obrigatório
+    </span>
+    <span *ngIf="_isSubmited && _formCadastrar.value[('senha')] != _formCadastrar.value[('confSenha')]">
+      As senhas nao coincidem!
+    </span> 
+    <ion-button expand="full" color="success" type="submit">
+      Cadastrar
+      <ion-icon name="log-in-outline"></ion-icon>
+    </ion-button>    
+   </form> 
+  </ion-list>
 </ion-content>

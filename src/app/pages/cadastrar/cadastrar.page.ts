@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Filme } from 'src/app/class/filme';
+import { CrudFilmeService } from 'src/app/services/crud-filme.service';
 import { FilmeService } from 'src/app/services/filme.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class CadastrarPage implements OnInit {
   constructor(public alertController: AlertController, 
     private _router: Router,
     private _filmeService:FilmeService,
+    private _filmeServiceDB:CrudFilmeService,
     private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -55,7 +57,7 @@ export class CadastrarPage implements OnInit {
       this._formCadastrar.value['genero'],
       this._formCadastrar.value['orcamento']
     )
-    this._filmeService.inserir(filme);
+    this._filmeServiceDB.createFilme(filme);
     this.presentAlert('Filmes','Cadastrar', filme.getTitulo() + ' cadastrado com Sucesso!');
     this._router.navigate(['home'])
 

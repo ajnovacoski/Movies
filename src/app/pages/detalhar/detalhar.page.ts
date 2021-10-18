@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Filme } from 'src/app/class/filme';
+import { CrudFilmeService } from 'src/app/services/crud-filme.service';
 import { FilmeService } from 'src/app/services/filme.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class DetalharPage implements OnInit {
     public alertController: AlertController, 
     private _router: Router,
     private _filmeService:FilmeService,
+    private _filmeServiceDB:CrudFilmeService,
     private _formBuilder: FormBuilder) { 
   }
 
@@ -74,22 +76,26 @@ export class DetalharPage implements OnInit {
       let _filmeEditado : Filme = new Filme(this._formDetalhar.value['titulo'], this._formDetalhar.value['sinopse'], this._formDetalhar.value['duracaoMinutos'],
       this._formDetalhar.value['anoLancamento'], this._formDetalhar.value['diretor'], this._formDetalhar.value['classificacaoIndicativa'],
       this._formDetalhar.value['genero'], this._formDetalhar.value['orcamento']);
-      if(this._filmeService.editar(this._filme, _filmeEditado)) {
-        this.presentAlert('Filmes', 'Editar', 'Dados do filme editados com sucesso!');
-        this._router.navigate(['home']);      
-      } else {
-        console.log('BARA BARA BARA')
-      }
+      this._filmeServiceDB.editFilme(this._filme.getId(), _filmeEditado)
+      .then(() => {
+        this.presentAlert('Filme', 'Editar', 'Contato Editado com Sucesso!');
+        this._router.navigate(['home']);
+      }).catch((error) => {
+        this.presentAlert('Filme', 'Editar', 'Houve um erro!');
+        console.log(error.message);
+      })
       
     }
   
     public excluir(): void{
-      if(this._filmeService.excluir(this._filme)){
-        this.presentAlert('Filmes', 'Excluir', 'Filme removido com sucesso!')
-        this._router.navigate(['home'])
-      } else {
-        this.presentAlert('Filmes', 'Excluir', 'Filme nao encontrado!')
-      }
+      this._filmeServiceDB.removeFilme(this._filme.getId())
+      .then(() => {
+        this.presentAlert('Filme', 'Remover', 'Contato Removido com Sucesso!');
+        this._router.navigate(['home']);
+      }).catch((error) =>{
+        this.presentAlert('Filme', 'Remover', 'Houve um erro!');
+        console.log(error.message);
+      })
     }
 
 }

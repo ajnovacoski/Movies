@@ -39,6 +39,10 @@ export class AuthServiceService {
   public signInWithGoogle(){
     this.AuthLogin(new auth.GoogleAuthProvider())
   }
+
+  public signInWithFacebook(){
+    this.AuthLogin(new auth.FacebookAuthProvider())
+  }
   // login com pop-up (face, google, etc)
   public AuthLogin(provider){
     return this.ngfireAuth.signInWithPopup(provider).then((result) => {
@@ -60,11 +64,11 @@ export class AuthServiceService {
       photoURL : user.photoURL,
       emailVerified : user.emailVerified
     }
-    return userRef.set(userDataConst, {merge : true})
+    return userRef.set(userDataConst, {merge : true});
   }
 
   public estaLogado() : boolean{
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('user'));
     return (user != null) ? true : false;
   }
 

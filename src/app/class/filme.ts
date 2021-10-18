@@ -7,7 +7,7 @@ export class Filme {
     private _classificacao_indicativa:string;
     private _genero:string;
     private _orcamento:number;
-    private _id:number;
+    private _id:string;
     private _imgURL: string;
 
 
@@ -30,11 +30,11 @@ export class Filme {
         this._imgURL = imgURL;        
     }
 
-    public getId(): number{
+    public getId(): string{
         return this._id
     }
 
-    public setId(id: number): void{
+    public setId(id: string): void{
         this._id = id;
     }
 
