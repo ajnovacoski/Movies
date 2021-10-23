@@ -2,7 +2,7 @@ export class Filme {
     private _titulo:string;
     private _sinopse:string;
     private _duracao_minutos:number;
-    private _ano_lancamento:number;
+    private _ano_lancamento:string;
     private _diretor:string;
     private _classificacao_indicativa:string;
     private _genero:string;
@@ -11,7 +11,7 @@ export class Filme {
     private _imgURL: string;
 
 
-    constructor(titulo:string, sinopse:string, duracao_minutos:number, ano_lancamento:number, diretor:string, classificacao_indicativa:string, genero:string, orcamento:number){  
+    constructor(titulo:string, sinopse:string, duracao_minutos:number, ano_lancamento:string, diretor:string, classificacao_indicativa:string, genero:string, orcamento:number){  
         this._titulo = titulo;
         this._sinopse = sinopse;
         this._duracao_minutos = duracao_minutos;
@@ -19,7 +19,7 @@ export class Filme {
         this._diretor = diretor;
         this._classificacao_indicativa = classificacao_indicativa;
         this._genero = genero;
-        this._orcamento = orcamento;        
+        this._orcamento = orcamento; 
     }
 
     public getImgURL(): string{
@@ -56,10 +56,10 @@ export class Filme {
     public setDuracao(duracao_minutos:number):void{
         this._duracao_minutos = duracao_minutos;
     }
-    public getAnoLancamento():number{
+    public getAnoLancamento():string{
         return this._ano_lancamento;
     }
-    public setAnoLancamento(ano_lancamento:number):void{
+    public setAnoLancamento(ano_lancamento:string):void{
         this._ano_lancamento = ano_lancamento;        
     }
     public getDiretor():string{

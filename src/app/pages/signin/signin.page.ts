@@ -58,6 +58,10 @@ export class SigninPage implements OnInit {
     this.authService.signInWithFacebook();
   }
 
+  private _signInTwitter(): void{
+    this.authService.signInWithTwitter();
+  }
+
   private signIn(){
     this.authService.signIn(this._formLogar.value['email'], this._formLogar.value['password'])
     .then((res) => {
@@ -84,9 +88,5 @@ export class SigninPage implements OnInit {
 
   public _irParaSignUp(){
     this.router.navigate(["/signup"])
-  }
-  //metodo teste
-  private goHome(){
-    this.router.navigate(['home'])
   }
 }

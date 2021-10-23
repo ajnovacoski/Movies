@@ -4,6 +4,7 @@ import { Filme } from 'src/app/class/filme';
 import { User } from 'src/app/class/user';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { CrudFilmeService } from 'src/app/services/crud-filme.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-home',
@@ -18,9 +19,9 @@ export class HomePage {
   constructor(
     private _router:Router,
     private _filmeServiceDB:CrudFilmeService,
-    private _authService:AuthServiceService
+    private _authService:AuthServiceService,
+    private imgService: ImageService
   ) {    
-    this._user = this._authService.getUserLogado();
     this.data = this._filmeServiceDB.getFilmes();
     this.data.forEach(element => {
       const lista = element as Array<any>;
@@ -29,12 +30,14 @@ export class HomePage {
         let filme = new Filme(c.data._titulo, c.data._sinopse, c.data._duracao_minutos, c.data._ano_lancamento, 
           c.data._diretor, c.data._classificacao_indicativa, c.data._genero, c.data._orcamento)
         filme.setId(c.key)
+        filme.setImgURL(c.data._imgURL)
         this._lista_filmes.push(filme)
       });
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this._user = this._authService.getUserLogado();
   }
 
 
@@ -51,6 +54,5 @@ export class HomePage {
   private logout(): void{
     this._authService.signOut()
   }
-
   
 }

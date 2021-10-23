@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Filme } from 'src/app/class/filme';
 import { CrudFilmeService } from 'src/app/services/crud-filme.service';
-import { FilmeService } from 'src/app/services/filme.service';
 
 @Component({
   selector: 'app-detalhar',
@@ -12,7 +11,7 @@ import { FilmeService } from 'src/app/services/filme.service';
   styleUrls: ['./detalhar.page.scss'],
 })
 export class DetalharPage implements OnInit {
-  private _filme: Filme;
+  public _filme: Filme;  
   private _isSubmited: boolean = false;
   private _editar: boolean = true;
   private _formDetalhar: FormGroup;
@@ -20,14 +19,13 @@ export class DetalharPage implements OnInit {
   constructor(
     public alertController: AlertController, 
     private _router: Router,
-    private _filmeService:FilmeService,
     private _filmeServiceDB:CrudFilmeService,
     private _formBuilder: FormBuilder) { 
   }
 
   ngOnInit() {
     const nav = this._router.getCurrentNavigation();
-    this._filme = nav.extras.state.objeto;
+    this._filme = nav.extras.state.objeto; 
     this._formDetalhar = this._formBuilder.group({
         titulo : [this._filme.getTitulo(), [Validators.required, Validators.minLength(8)]],
         sinopse: [this._filme.getSinopse(), [Validators.required, Validators.minLength(14)]],
@@ -37,7 +35,7 @@ export class DetalharPage implements OnInit {
         classificacaoIndicativa: [this._filme.getClassificacaoIndicativa(), [Validators.required]],
         genero: [this._filme.getGenero(), [Validators.required]],
         orcamento: [this._filme.getOrcamento(), [Validators.required]]
-    });
+    });    
   }
 
   

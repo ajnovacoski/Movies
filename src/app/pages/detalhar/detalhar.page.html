@@ -11,13 +11,16 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content background={{_filme.getImgURL()}}>
   <ion-item>
     <ion-label>Habilitar Edição</ion-label>
     <ion-toggle color="success" [(ngModel)]="_editar"></ion-toggle>
   </ion-item>
   <ion-list>
-    <form [formGroup] = '_formDetalhar' (ngSubmit)='submitForm()' novalidate>
+    <ion-item>
+      <ion-img src={{_filme.getImgURL()}}></ion-img>
+    </ion-item>
+    <form [formGroup] = '_formDetalhar' (ngSubmit)='submitForm()' novalidate>       
       <ion-item>
         <ion-label position="floating">Título</ion-label>
         <ion-input [disabled]="_editar" type="text" formControlName="titulo"></ion-input>
@@ -26,7 +29,7 @@
       <ion-item>
         <ion-label position="floating">Sinopse</ion-label>
         <!-- <ion-input type="text" formControlName="sinopse" ></ion-input> -->
-        <ion-textarea [disabled]="_editar" formControlName="sinopse"></ion-textarea>
+        <ion-textarea [disabled]="_editar" autoGrow="true" formControlName="sinopse"></ion-textarea>
       </ion-item>
 
       <ion-item>
@@ -78,7 +81,6 @@
           <ion-select-option value="thriller">Thriller</ion-select-option>
         </ion-select>
       </ion-item>
-
       <ion-item>
         <ion-label position="floating">Orçamento</ion-label>
         <ion-input [disabled]="_editar" type="number" formControlName="orcamento"></ion-input>
@@ -94,7 +96,7 @@
           Excluir
         <ion-icon slot="end" name="trash"></ion-icon>
       </ion-button>
-      </ion-item>
+      </ion-item>      
     </form>
 </ion-list>
 

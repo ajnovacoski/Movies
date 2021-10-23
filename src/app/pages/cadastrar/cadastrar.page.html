@@ -69,8 +69,10 @@
       <ion-input type="number" formControlName="orcamento"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-button expand="full" type="submit">Cadastrar</ion-button>
+      <ion-label position="stacked"><b>Capa</b></ion-label>
+      <ion-input type="file" accept="image/*" formControlName="file" (change)="onFileChange($event)"></ion-input>
     </ion-item>
+      <ion-button expand="full" type="submit">Cadastrar</ion-button>
     
 
   </form>

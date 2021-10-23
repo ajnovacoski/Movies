@@ -43,6 +43,10 @@ export class AuthServiceService {
   public signInWithFacebook(){
     this.AuthLogin(new auth.FacebookAuthProvider())
   }
+
+  public signInWithTwitter(){
+    this.AuthLogin(new auth.TwitterAuthProvider())
+  }
   // login com pop-up (face, google, etc)
   public AuthLogin(provider){
     return this.ngfireAuth.signInWithPopup(provider).then((result) => {
