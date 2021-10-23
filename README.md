@@ -11,3 +11,4 @@
   -  Classificação Indicativa
   -  Gênero
   -  Orçamento.
+  -  Capa(Imagem)
